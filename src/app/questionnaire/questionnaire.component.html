@@ -1,0 +1,28 @@
+
+
+
+<div class="questionnaire-container">
+<h1 >Questions</h1>
+<div class="question" *ngIf="currentQuestionIndex < questions.length">
+<h2>{{ questions[currentQuestionIndex].text }}</h2>
+<form >
+ <div class="options"  *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
+   <label>
+     <input type="radio" name="questionOption" [value]="i" [(ngModel)]="selectedOptionIndex">
+     {{ option }}
+   </label>
+ </div>
+</form>
+<br>
+<div *ngIf="selectedOptionIndex !== null">
+ <p>Correct answer: {{ correctAnswers[currentQuestionIndex]}}</p>
+</div>
+<button [disabled]="selectedOptionIndex === null" (click)="nextQuestion()">NEXT</button>
+</div>
+<button   *ngIf="currentQuestionIndex === questions.length" [disabled]="currentQuestionIndex === null" (click)="submit()">SUBMIT</button>
+<br>
+<div *ngIf="allQuestionsAnswered">
+ All questions have been answered.
+ Thank You.
+</div>
+</div>
